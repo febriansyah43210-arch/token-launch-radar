@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-Token Radar</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header id="top">
+  <div class="brand">
+    <div class="logo">◈</div>
+    <div>
+      <h1>Pre-Token Radar</h1>
+      <p class="sub">protocols valued before their token exists — fitted from the snapshot, tested held-out</p>
+    </div>
+  </div>
+  <div class="stamp">
+    <span id="asof"></span>
+    <span id="ver"></span>
+  </div>
+</header>
+
+<section id="integrity" class="strip">
+  <div class="checks" id="checks"></div>
+</section>
+
+
+<section id="board">
+  <h2>The board <span class="muted" id="shown"></span></h2>
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search name, chain, category…">
+    <select id="fam"><option value="">All families</option></select>
+    <select id="chain"><option value="">All chains</option></select>
+    <select id="tier">
+      <option value="">All tiers</option>
+      <option value="watch">Watchlist</option>
+      <option value="early">Early (below floor)</option>
+    </select>
+    <select id="verdict">
+      <option value="">All verdicts</option>
+      <option>FARM</option>
+      <option>MARGINAL</option>
+      <option>SKIP</option>
+    </select>
+    <select id="sort">
+      <option value="implied">Sort: implied value</option>
+      <option value="net">Sort: net $/hour</option>
+      <option value="tvl">Sort: TVL</option>
+      <option value="odds">Sort: token odds</option>
+      <option value="age">Sort: age</option>
+    </select>
+    <button id="reset" type="button">Reset</button>
+    <button id="csv" type="button">CSV</button>
+  </div>
+  <div class="tablewrap">
+    <table id="rows">
+      <thead><tr>
+        <th>#</th><th class="l">Protocol</th><th>TVL</th><th>7d</th><th>Age</th>
+        <th>Token odds</th><th>If it launches</th><th>Implied value · P25–P75</th>
+        <th>Verdict · net of fees</th><th>Net / hour</th>
+      </tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section id="evidence">
+  <h2>How the value is built</h2>
+  <p class="oneline" id="formula"></p>
+  <div class="cards" id="cards"></div>
+  <table class="terms" id="termtable"></table>
+</section>
+<section id="live">
+  <h2>Traded peers — what the market pays</h2>
+  <p class="muted">The same fit prices these: fitted multiple vs the market's own mcap/TVL.</p>
+  <div class="tablewrap"><table id="livetable"></table></div>
+</section>
+
+<aside id="drawer" class="drawer" aria-hidden="true">
+  <div class="sheet">
+    <button id="close" type="button">Close ✕</button>
+    <div id="detail"></div>
+  </div>
+</aside>
+
+<footer>
+  <p>Board rows are the snapshot's own protocols; ranks 1–n follow the implied value, never rising. Watchlist coverage is a floor, never a ceiling. This page makes no network request: everything it shows was computed by main.ts from /input/snapshot.json.</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
